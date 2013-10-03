@@ -1,0 +1,16 @@
+name = Featured Content Page
+description = Panel Page for Featured Content
+core = 7.x
+package = ImageX
+version = 7.x-1.0
+project = imagex_featured_content_page
+dependencies[] = page_manager
+dependencies[] = views
+dependencies[] = views_content
+dependencies[] = imagex_content_featured
+features[ctools][] = page_manager:pages_default:1
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[page_manager_pages][] = imagex_featured_content
+features[views_view][] = imagex_featured_content
+features_exclude[dependencies][ctools] = ctools
