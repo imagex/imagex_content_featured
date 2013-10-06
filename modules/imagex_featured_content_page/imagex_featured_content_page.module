@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Featured Content Page feature.
+ */
+
+include_once 'imagex_featured_content_page.features.inc';
