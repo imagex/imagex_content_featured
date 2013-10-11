@@ -1,2 +1,8 @@
-Any content created in the system can be flagged as “featured” by a Content Manager. The Content Manager is able to select/deselect a checkbox attached to any piece of content to mark it as featured.
-using Drupal VBO administrators can bulk assign 'promote to home page' via a content panel.
+## Featured Content
+
+Provides administrative panel enabling administrators to mark content as 'Featured'.
+
+## License
+
+This module has been engineered by [ImageX](http://www.imagexmedia.com) and has been licensed under the [GNU General Public License](http://www.gnu.org/licenses/gpl-2.0.html) version 2.
+

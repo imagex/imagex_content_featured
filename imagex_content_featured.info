@@ -1,5 +1,5 @@
 name = Content - Featured
-description = Panel for featured content (using promote to home page)
+description = Provides administrative panel enabling administrators to mark content 'Featured'.
 core = 7.x
 package = ImageX
 version = 7.x-1.0
