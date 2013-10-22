@@ -4,4 +4,4 @@
  * Code for the Featured Content Page feature.
  */
 
-include_once 'imagex_featured_content_page.features.inc';
+include_once 'imagex_content_featured_page.features.inc';

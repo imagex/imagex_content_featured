@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * imagex_featured_content_page.pages_default.inc
+ * imagex_content_featured_page.pages_default.inc
  */
 
 /**
  * Implements hook_default_page_manager_pages().
  */
-function imagex_featured_content_page_default_page_manager_pages() {
+function imagex_content_featured_page_default_page_manager_pages() {
   $page = new stdClass();
   $page->disabled = FALSE; /* Edit this to true to make a default page disabled initially */
   $page->api_version = 1;

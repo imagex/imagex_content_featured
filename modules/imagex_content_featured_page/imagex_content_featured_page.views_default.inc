@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * imagex_featured_content_page.views_default.inc
+ * imagex_content_featured_page.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function imagex_featured_content_page_views_default_views() {
+function imagex_content_featured_page_views_default_views() {
   $export = array();
 
   $view = new view();
