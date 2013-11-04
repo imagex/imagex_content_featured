@@ -1,0 +1,4 @@
+name = Featured Label
+description =  Changed node form label value for 'Promoted to front page' to 'Featured'.
+core = 7.x
+dependencies[] = imagex_content_featured
