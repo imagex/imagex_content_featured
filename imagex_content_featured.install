@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * Update nodequeue.
+ */
+function imagex_content_featured_update_7001() {
+  imagex_content_featured_update_nodequeue();
+}
+
+/**
+ * Implements hook_install().
+ */
+function imagex_content_featured_install() {
+  imagex_content_featured_update_nodequeue();
+}
+
+/**
+ * Update nodequeue default content.
+ */
+function imagex_content_featured_update_nodequeue() {
+  if (db_table_exists('nodequeue_nodes')) {
+    $nodes = node_load_multiple(array(), array('promote' => 1));
+    $queue = nodequeue_load_queue_by_name('imagex_content_featured');
+    if ($queue) {
+      foreach($nodes as $row) {
+        $query = db_select('nodequeue_nodes', 'nn');
+        $query->condition('nn.sqid', $queue->qid);
+        $query->addExpression('MAX(position)+1');
+        $position = $query->execute()->fetchField();
+
+        db_insert('nodequeue_nodes')
+          ->fields(array(
+            'sqid' => $queue->qid,
+            'qid' => $queue->qid,
+            'nid' => $row->nid,
+            'position' => ($position) ? $position : 1,
+            'timestamp' => REQUEST_TIME
+          ))
+          ->execute();
+      }
+    }
+  }
+}

@@ -5,3 +5,13 @@
  */
 
 include_once 'imagex_content_featured.features.inc';
+
+/**
+ * Implementation of hook_nodequeue_add().
+ */
+function imagex_content_featured_nodequeue_add($sqid, $nid) {
+  $node = node_load($nid);
+  $node->promote = TRUE;
+  node_save($node);
+}
+

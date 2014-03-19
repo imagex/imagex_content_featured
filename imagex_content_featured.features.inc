@@ -26,10 +26,10 @@ function imagex_content_featured_views_api($module = NULL, $api = NULL) {
 function imagex_content_featured_fe_nodequeue_export_fields() {
   $nodequeues = array();
 
-  // Exported nodequeues: featured
-  $nodequeues['featured'] = array(
-    'name' => 'featured',
-    'title' => 'Featured',
+  // Exported nodequeues: imagex_content_featured
+  $nodequeues['imagex_content_featured'] = array(
+    'name' => 'imagex_content_featured',
+    'title' => 'Imagex content featured',
     'subqueue_title' => '',
     'size' => 0,
     'link' => '',
