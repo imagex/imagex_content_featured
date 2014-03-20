@@ -7,11 +7,42 @@
 include_once 'imagex_content_featured.features.inc';
 
 /**
- * Implementation of hook_nodequeue_add().
+ * Page callback for autocomplete.
  */
-function imagex_content_featured_nodequeue_add($sqid, $nid) {
-  $node = node_load($nid);
-  $node->promote = TRUE;
-  node_save($node);
+function imagex_content_featured_nodequeue_autocomplete() {
+  $nodes = node_load_multiple(array(), array('promote' => NODE_PROMOTED));
+  $matches = array();
+  foreach($nodes as $node) {
+    $matches[$node->nid] = check_plain($node->title) . " [nid: $node->nid]";
+  }
+  drupal_json_output(drupal_map_assoc($matches));
 }
 
+/**
+ * Implements hook_menu_alter().
+ */
+function imagex_content_featured_menu_alter(&$items) {
+  $items['nodequeue/autocomplete']['page callback'] = 'imagex_content_featured_nodequeue_autocomplete';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function imagex_content_featured_form_alter(&$form, &$form_state, $form_id) {
+  $queue = nodequeue_load_queue_by_name('imagex_content_featured');
+  if ($form_id == 'nodequeue_arrange_subqueue_form_' . $queue->qid) {
+    $form['add']['submit']['#validate'][] = 'imagex_content_featured_form_validate';
+  }
+}
+
+/**
+ * Validate form
+ */
+function imagex_content_featured_form_validate($form, &$form_state) {
+  $nodes = node_load_multiple(array(), array('promote' => NODE_PROMOTED));
+  $matches = array();
+  preg_match("/([0-9]+)]$/", $form_state['input']['add']['nid'], $matches);
+  if (!isset($nodes[$matches[1]])) {
+    form_set_error('', t('Content not featured.'));
+  }
+}
