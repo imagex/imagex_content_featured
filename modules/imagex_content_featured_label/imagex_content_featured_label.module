@@ -18,4 +18,9 @@ function imagex_content_featured_form_alter(&$form, &$form_state, $form_id) {
        $form['options']['promote']['#title'] = 'Featured' ;
     }
   }
+
+  $queue = nodequeue_load_queue_by_name('imagex_content_featured');
+  if (!empty($queue->qid) && $form_id == 'nodequeue_arrange_subqueue_form_' . $queue->qid) {
+    $form['add']['submit']['#validate'][] = 'imagex_content_featured_form_validate';
+  }
 }

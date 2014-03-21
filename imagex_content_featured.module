@@ -5,3 +5,34 @@
  */
 
 include_once 'imagex_content_featured.features.inc';
+
+/**
+ * Page callback for autocomplete.
+ */
+function imagex_content_featured_nodequeue_autocomplete() {
+  $nodes = node_load_multiple(array(), array('promote' => NODE_PROMOTED));
+  $matches = array();
+  foreach($nodes as $node) {
+    $matches[$node->nid] = check_plain($node->title) . " [nid: $node->nid]";
+  }
+  drupal_json_output(drupal_map_assoc($matches));
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function imagex_content_featured_menu_alter(&$items) {
+  $items['nodequeue/autocomplete']['page callback'] = 'imagex_content_featured_nodequeue_autocomplete';
+}
+
+/**
+ * Validate form
+ */
+function imagex_content_featured_form_validate($form, &$form_state) {
+  $nodes = node_load_multiple(array(), array('promote' => NODE_PROMOTED));
+  $matches = array();
+  preg_match("/([0-9]+)]$/", $form_state['input']['add']['nid'], $matches);
+  if (!isset($nodes[$matches[1]])) {
+    form_set_error('', t('Content not featured.'));
+  }
+}

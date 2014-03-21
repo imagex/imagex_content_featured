@@ -232,5 +232,7 @@ function imagex_content_featured_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $export['imagex_content_featured'] = $view;
 
+  features_alter_code('views_view', $export);
+
   return $export;
 }
